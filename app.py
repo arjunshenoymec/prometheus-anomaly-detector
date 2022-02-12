@@ -25,7 +25,7 @@ PREDICTOR_MODEL_LIST = list()
 
 MODEL_NAME = Configuration.model_name
 
-model_predictor_facory = ModelPredictorFactory()
+model_predictor_factory = ModelPredictorFactory()
 
 pc = PrometheusConnect(
     url=Configuration.prometheus_url,
