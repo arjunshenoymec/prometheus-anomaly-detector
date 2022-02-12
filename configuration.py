@@ -64,3 +64,8 @@ class Configuration:
     # Note: The upper limit to this will be decided by the number of CPU cores 
     # available to the container.
     parallelism = int(os.getenv("FLT_PARALLELISM", "1"))
+
+    # An option to choose the type of model to be used.
+    # Type: String
+    # Default: "lstm"
+    model_name = os.getenv("FLT_MODEL_TYPE", "lstm")

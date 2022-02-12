@@ -12,7 +12,7 @@ import tornado.web
 from prometheus_client import Gauge, generate_latest, REGISTRY
 from prometheus_api_client import PrometheusConnect, Metric
 from configuration import Configuration
-import model
+from model_factory import ModelPredictorFactory
 import schedule
 
 # Set up logging
@@ -23,6 +23,9 @@ METRICS_LIST = Configuration.metrics_list
 # list of ModelPredictor Objects shared between processes
 PREDICTOR_MODEL_LIST = list()
 
+MODEL_NAME = Configuration.model_name
+
+model_predictor_facory = ModelPredictorFactory()
 
 pc = PrometheusConnect(
     url=Configuration.prometheus_url,
@@ -36,7 +39,7 @@ for metric in METRICS_LIST:
 
     for unique_metric in metric_init:
         PREDICTOR_MODEL_LIST.append(
-            model.MetricPredictor(
+            model_predictor_factory[MODEL_NAME](
                 unique_metric,
                 rolling_data_window_size=Configuration.rolling_training_window_size,
             )
